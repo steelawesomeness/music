@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Music</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hi! I'm Steel, and this is my page.</h1>
+        <p>Here are some of my songs:</p>
+        <ul id="songList"></ul>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('songs.json')
+                .then(response => response.json())
+                .then(songs => {
+                    const songList = document.getElementById('songList');
+                    songs.forEach(song => {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = `music/${song}`;
+                        link.textContent = song.replace('.mp3', '');
+                        listItem.appendChild(link);
+                        songList.appendChild(listItem);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
+
